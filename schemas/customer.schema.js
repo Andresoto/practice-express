@@ -1,5 +1,7 @@
 const Joi = require('joi');
 
+const { createUserSchema, updateUserSchema } = require('./user.schema');
+
 const id = Joi.number().integer();
 const name = Joi.string().min(3).max(50);
 const lastName = Joi.string().min(3).max(50);
@@ -10,14 +12,14 @@ const createCustomerSchema = Joi.object({
   name: name.required(),
   lastName: lastName.required(),
   phone: phone.required(),
-  userId: userId.required(),
+  user: createUserSchema.required(),
 });
 
 const updateCustomerSchema = Joi.object({
   name: name,
   lastName: lastName,
   phone: phone,
-  userId: userId,
+  user: updateUserSchema,
 }).or('name', 'lastName', 'phone', 'userId').required().messages({
   'object.missing': 'At least one field must be provided for update',
   'object.unknown': 'Invalid field(s) provided for update',
