@@ -33,6 +33,7 @@ const CustomerSchema = {
     allowNull: false,
     type: DataTypes.INTEGER,
     field: 'user_id',
+    unique: true, // Ensures one-to-one relationship with User
     references: {
       model: USER_TABLE,
       key: 'id'
