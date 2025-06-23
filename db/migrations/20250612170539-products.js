@@ -1,13 +1,13 @@
 'use strict';
 
-const { categorySchema, CATEGORY_TABLE } = require('../models/category.model');
-const { productSchema, PRODUCT_TABLE } = require('../models/product.model');
+const { CategorySchema, CATEGORY_TABLE } = require('../models/category.model');
+const { ProductSchema, PRODUCT_TABLE } = require('../models/product.model');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable(CATEGORY_TABLE, categorySchema);
-    await queryInterface.createTable(PRODUCT_TABLE, productSchema);
+    await queryInterface.createTable(CATEGORY_TABLE, CategorySchema);
+    await queryInterface.createTable(PRODUCT_TABLE, ProductSchema);
   },
 
   async down (queryInterface, Sequelize) {
