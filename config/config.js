@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const config = {
   env: process.env.NODE_ENV || 'development',
+  isProd: process.env.NODE_ENV === 'production',
   port: process.env.PORT || 3000,
   db: {
     host: process.env.DB_HOST,
@@ -10,6 +11,7 @@ const config = {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
   },
+  dtUrl: process.env.DATABASE_URL,
 }
 
 module.exports = { config };
