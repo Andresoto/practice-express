@@ -12,6 +12,7 @@ const config = {
     database: process.env.DB_NAME,
   },
   dtUrl: process.env.DATABASE_URL,
+  apiKey: process.env.API_KEY,
 }
 
 module.exports = { config };
