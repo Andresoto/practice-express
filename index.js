@@ -15,6 +15,9 @@ app.use(express.json());
 // app.use(cors());
 
 // para darle acceso a origines específicos
+
+require('./utils/auth'); // Importa la configuración de autenticación
+
 const whiteList = ['http://localhost:8080', 'https://myapp.com']
 const options = {
   origin: (origin, callback) => {
