@@ -36,6 +36,26 @@ class OrderService {
     return order;
   }
 
+  async findByUser(userId) {
+    const orders = await models.Order.findAll({
+      where: {
+        '$customer.user.id$': userId
+      },
+      include: [
+        {
+          association: 'customer',
+          include: ['user']
+        },
+        'items'
+      ],
+      order: [['id', 'ASC']]
+    });
+    if (!orders || orders.length === 0) {
+      throw boom.notFound('No orders found for this user');
+    }
+    return orders;
+  }
+
   async update(id, changes) {
     const order = await this.findOne(id);
     if (!order) {
