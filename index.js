@@ -10,6 +10,8 @@ const port = 3000;
 // se debe agregar para recibir información en formato json por el body
 app.use(express.json());
 
+app.disable('x-powered-by'); // Deshabilita el encabezado x-powered-by
+
 // para los cors
 // para darle acceso a cualquier origen
 // app.use(cors());
