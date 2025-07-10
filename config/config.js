@@ -16,6 +16,7 @@ const config = {
   jwtSecret: process.env.JWT_SECRET,
   smtpEmail: process.env.SMTP_EMAIL,
   smtpPassword: process.env.SMTP_PASSWORD,
+  frontendUrl: process.env.FRONTEND_URL || 'http://localhost:8080',
 }
 
 module.exports = { config };

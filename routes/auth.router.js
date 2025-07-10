@@ -23,11 +23,11 @@ router.post('/login',
   }
 );
 
-router.post('/recover-password',
+router.post('/recovery-password',
   async (req, res, next) => {
     const { email } = req.body;
     try {
-      const rta = await authService.sendMail(email);
+      const rta = await authService.sendRecoveryPassword(email);
       res.json(rta);
     } catch (error) {
       next(error);
