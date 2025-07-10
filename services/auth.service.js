@@ -44,8 +44,8 @@ class AuthService {
       secure: true,
       port: 465,
       auth: {
-        user: config.mail,
-        pass: config.mailPassword,
+        user: config.smtpEmail,
+        pass: config.smtpPassword,
       },
     });
 
