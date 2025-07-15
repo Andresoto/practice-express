@@ -19,7 +19,23 @@ class AuthService {
       throw boom.unauthorized('Invalid email or password');
     }
     delete user.dataValues.password; // Remove password from response
+    delete user.dataValues.recoveryToken; // Remove recovery token from response
     return user;
+  }
+
+  async changePassword(token, newPassword) {
+    try {
+      const payload = jwt.verify(token, config.jwtSecret);
+      const user = await userService.findOne(payload.sub);
+      if (user.recoveryToken !== token) {
+        throw boom.unauthorized('Invalid token');
+      }
+      const hash = await bcrypt.hash(newPassword, 10);
+      await userService.update(user.id, { password: hash, recoveryToken: null });
+      return { message: 'Password changed successfully' };
+    } catch (error) {
+      boom.unauthorized();
+    }
   }
 
   singToken(user) {
@@ -49,7 +65,9 @@ class AuthService {
       subject: 'Email para recuperar contraseña',
       html: `<b>Ingresa a este link para recuperar la contraseña</b>
              <a href="${link}">Recuperar contraseña</a>
-             <p>Este link es válido por 15 minutos</p>`,
+             <p>Este link es válido por 15 minutos</p>
+             <p>token</p>
+             <p>${token}</p>`,
     }
     const rta = await this.sendMail(mail);
     return rta;

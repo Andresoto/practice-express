@@ -13,6 +13,7 @@ class UserService {
       password: hash
     });
     delete newUser.dataValues.password; // Remove password from response
+    delete newUser.dataValues.recoveryToken; // Remove recovery token from response
     return newUser;
   }
 
